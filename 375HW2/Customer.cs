@@ -29,7 +29,7 @@ namespace CSSE375HW2
 			{
 				double thisAmount = 0;
 
-				thisAmount = AmountFor(rental);
+				thisAmount = rental.GetCharge();
 				
 				// add frequent renter points
 				frequentRenterPoints++;
@@ -46,10 +46,6 @@ namespace CSSE375HW2
 			result += "Amount owed is " + totalAmount + "\n";
 			result += "You earned " + frequentRenterPoints + " frequent renter points";
 			return result;
-		}
-		private double AmountFor(Rental aRental)
-		{
-			return aRental.GetCharge();
 		}
 	}
 }
