@@ -27,13 +27,7 @@ namespace CSSE375HW2
 			String result = "Rental Record for " + GetName() + "\n";
 			foreach (var rental in _rentals)
 			{
-				// add frequent renter points
-				frequentRenterPoints++;
-				// add bonus for a two day new release rental
-				if ((rental.GetMovie().GetPriceCode() ==
-				     Movie.NewRelease) &&
-				    rental.GetDaysRented() > 1)
-					frequentRenterPoints++;
+				frequentRenterPoints += rental.GetFrequentRenterPoints();
 				// show figures for this rental
 				result += "\t" + rental.GetMovie().GetTitle() + "\t" + rental.GetCharge() + "\n";
 				totalAmount += rental.GetCharge();
