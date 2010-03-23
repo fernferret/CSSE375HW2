@@ -28,7 +28,6 @@ namespace CSSE375HW2
 			foreach (var rental in _rentals)
 			{
 				double thisAmount = 0;
-				//determine amounts for each line
 
 				thisAmount = AmountFor(rental);
 				
@@ -48,26 +47,26 @@ namespace CSSE375HW2
 			result += "You earned " + frequentRenterPoints + " frequent renter points";
 			return result;
 		}
-		private double AmountFor(Rental r)
+		private double AmountFor(Rental aRental)
 		{
-			double thisAmount = 0;
-			switch (r.GetMovie().GetPriceCode())
+			double result = 0;
+			switch (aRental.GetMovie().GetPriceCode())
 			{
 				case Movie.Regular:
-					thisAmount += 2;
-					if (r.GetDaysRented() > 2)
-						thisAmount += (r.GetDaysRented() - 2) * 1.5;
+					result += 2;
+					if (aRental.GetDaysRented() > 2)
+						result += (aRental.GetDaysRented() - 2) * 1.5;
 					break;
 				case Movie.NewRelease:
-					thisAmount += r.GetDaysRented() * 3;
+					result += aRental.GetDaysRented() * 3;
 					break;
 				case Movie.Childrens:
-					thisAmount += 1.5;
-					if (r.GetDaysRented() > 3)
-						thisAmount += (r.GetDaysRented() - 3) * 1.5;
+					result += 1.5;
+					if (aRental.GetDaysRented() > 3)
+						result += (aRental.GetDaysRented() - 3) * 1.5;
 					break;
 			}
-			return thisAmount;
+			return result;
 		}
 	}
 }
