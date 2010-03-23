@@ -29,22 +29,9 @@ namespace CSSE375HW2
 			{
 				double thisAmount = 0;
 				//determine amounts for each line
-				switch (rental.GetMovie().GetPriceCode())
-				{
-					case Movie.Regular:
-						thisAmount += 2;
-						if (rental.GetDaysRented() > 2)
-							thisAmount += (rental.GetDaysRented() - 2) * 1.5;
-						break;
-					case Movie.NewRelease:
-						thisAmount += rental.GetDaysRented() * 3;
-						break;
-					case Movie.Childrens:
-						thisAmount += 1.5;
-						if (rental.GetDaysRented() > 3)
-							thisAmount += (rental.GetDaysRented() - 3) * 1.5;
-						break;
-				}
+
+				thisAmount = AmountFor(rental);
+				
 				// add frequent renter points
 				frequentRenterPoints++;
 				// add bonus for a two day new release rental
@@ -60,6 +47,27 @@ namespace CSSE375HW2
 			result += "Amount owed is " + totalAmount + "\n";
 			result += "You earned " + frequentRenterPoints + " frequent renter points";
 			return result;
+		}
+		private double AmountFor(Rental r)
+		{
+			double thisAmount = 0;
+			switch (r.GetMovie().GetPriceCode())
+			{
+				case Movie.Regular:
+					thisAmount += 2;
+					if (r.GetDaysRented() > 2)
+						thisAmount += (r.GetDaysRented() - 2) * 1.5;
+					break;
+				case Movie.NewRelease:
+					thisAmount += r.GetDaysRented() * 3;
+					break;
+				case Movie.Childrens:
+					thisAmount += 1.5;
+					if (r.GetDaysRented() > 3)
+						thisAmount += (r.GetDaysRented() - 3) * 1.5;
+					break;
+			}
+			return thisAmount;
 		}
 	}
 }
