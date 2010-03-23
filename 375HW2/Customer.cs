@@ -49,24 +49,7 @@ namespace CSSE375HW2
 		}
 		private double AmountFor(Rental aRental)
 		{
-			double result = 0;
-			switch (aRental.GetMovie().GetPriceCode())
-			{
-				case Movie.Regular:
-					result += 2;
-					if (aRental.GetDaysRented() > 2)
-						result += (aRental.GetDaysRented() - 2) * 1.5;
-					break;
-				case Movie.NewRelease:
-					result += aRental.GetDaysRented() * 3;
-					break;
-				case Movie.Childrens:
-					result += 1.5;
-					if (aRental.GetDaysRented() > 3)
-						result += (aRental.GetDaysRented() - 3) * 1.5;
-					break;
-			}
-			return result;
+			return aRental.GetCharge();
 		}
 	}
 }
