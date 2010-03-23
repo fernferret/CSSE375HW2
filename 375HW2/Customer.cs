@@ -22,19 +22,35 @@ namespace CSSE375HW2
 		}
 		public String Statement()
 		{
-			double totalAmount = 0;
+			//double totalAmount = 0;
 			int frequentRenterPoints = 0;
 			String result = "Rental Record for " + GetName() + "\n";
 			foreach (var rental in _rentals)
 			{
-				frequentRenterPoints += rental.GetFrequentRenterPoints();
 				// show figures for this rental
 				result += "\t" + rental.GetMovie().GetTitle() + "\t" + rental.GetCharge() + "\n";
-				totalAmount += rental.GetCharge();
 			}
 			// add footer lines
-			result += "Amount owed is " + totalAmount + "\n";
-			result += "You earned " + frequentRenterPoints + " frequent renter points";
+			result += "Amount owed is " + GetTotalCharge() + "\n";
+			result += "You earned " + GetTotalFrequentRenterPoints() + " frequent renter points";
+			return result;
+		}
+		private double GetTotalCharge()
+		{
+			double result = 0;
+			foreach (var rental in _rentals)
+			{
+				result += rental.GetCharge();
+			}
+			return result;
+		}
+		private int GetTotalFrequentRenterPoints()
+		{
+			int result = 0;
+			foreach (var rental in _rentals)
+			{
+				result += rental.GetFrequentRenterPoints();
+			}
 			return result;
 		}
 	}
