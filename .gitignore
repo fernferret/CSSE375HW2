@@ -1,0 +1,10 @@
+_ReSharper*
+*resharper*
+bin/
+obj/
+TestResults/
+AuthoringTests.txt
+*.testrunconfig
+*.vsmdi
+*.suo
+AssemblyInfo.cs
