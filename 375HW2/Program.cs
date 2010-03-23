@@ -1,6 +1,4 @@
-﻿
-
-namespace CSSE375HW2
+﻿namespace CSSE375HW2
 {
 	class Program
 	{
