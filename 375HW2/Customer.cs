@@ -22,20 +22,13 @@ namespace CSSE375HW2
 		}
 		public String Statement()
 		{
-			//double totalAmount = 0;
-			int frequentRenterPoints = 0;
-			String result = "Rental Record for " + GetName() + "\n";
-			foreach (var rental in _rentals)
-			{
-				// show figures for this rental
-				result += "\t" + rental.GetMovie().GetTitle() + "\t" + rental.GetCharge() + "\n";
-			}
-			// add footer lines
-			result += "Amount owed is " + GetTotalCharge() + "\n";
-			result += "You earned " + GetTotalFrequentRenterPoints() + " frequent renter points";
-			return result;
+			return new TextStatement().Value(this);
 		}
-		private double GetTotalCharge()
+		public List<Rental> GetRentals()
+		{
+			return _rentals;
+		}
+		public double GetTotalCharge()
 		{
 			double result = 0;
 			foreach (var rental in _rentals)
@@ -44,7 +37,7 @@ namespace CSSE375HW2
 			}
 			return result;
 		}
-		private int GetTotalFrequentRenterPoints()
+		public int GetTotalFrequentRenterPoints()
 		{
 			int result = 0;
 			foreach (var rental in _rentals)
@@ -55,16 +48,11 @@ namespace CSSE375HW2
 		}
 		public String HtmlStatement()
 		{
-			String result = "<h1>Rentals for <em>" + GetName() + "</em></h1></p>\n";
-			foreach (var rental in _rentals)
-			{
-				// Show figures for each rental
-				result += rental.GetMovie().GetTitle() + ": " + rental.GetCharge() + "<br />\n";
-			}
-			// Add footer lines
-			result += "<p>You owe <em>" + GetTotalCharge() + "</em></p>\n";
-			result += "On this rental you earned <em>" + GetTotalFrequentRenterPoints() + "</em> frequent renter points</p>";
-			return result;
+			return new HtmlStatement().Value(this);
+		}
+		public String XMLStatement()
+		{
+			return new XMLStatement().Value(this);
 		}
 	}
 }

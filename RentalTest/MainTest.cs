@@ -171,6 +171,46 @@ namespace RentalTest
 		}
 		#endregion
 
+		#region BONUS XML Tests
+		[TestMethod]
+		public void TestTwoRentalXML()
+		{
+			var m = new Movie("Taken", Movie.NewRelease);
+			var m2 = new Movie("The Rock", Movie.Regular);
+			var r = new Rental(m, 4);
+			var r2 = new Rental(m2, 5);
+			var c = new Customer("Eric");
+			c.AddRental(r);
+			c.AddRental(r2);
+			Assert.AreEqual(c.XMLStatement(), "<Statement><Name>Eric</Name><Rentals><Rental><MovieName>Taken</MovieName><CostToRent>12</CostToRent></Rental><Rental><MovieName>The Rock</MovieName><CostToRent>6.5</CostToRent></Rental></Rentals><AmountOwed>18.5</AmountOwed><PointsEarned>3</PointsEarned></Statement>");
+		}
+		[TestMethod]
+		public void TestMultiRentalXML()
+		{
+			var m = new Movie("Taken", Movie.NewRelease);
+			var m2 = new Movie("The Rock", Movie.Regular);
+			var m3 = new Movie("300", Movie.NewRelease);
+			var m4 = new Movie("Bambi", Movie.Childrens);
+			var r = new Rental(m, 4);
+			var r2 = new Rental(m2, 5);
+			var r3 = new Rental(m3, 2);
+			var r4 = new Rental(m4, 7);
+
+			var c = new Customer("Eric");
+			c.AddRental(r);
+			c.AddRental(r2);
+			c.AddRental(r3);
+			c.AddRental(r4);
+			Assert.AreEqual(c.XMLStatement(), "<Statement><Name>Eric</Name><Rentals><Rental><MovieName>Taken</MovieName><CostToRent>12</CostToRent></Rental><Rental><MovieName>The Rock</MovieName><CostToRent>6.5</CostToRent></Rental><Rental><MovieName>300</MovieName><CostToRent>6</CostToRent></Rental><Rental><MovieName>Bambi</MovieName><CostToRent>7.5</CostToRent></Rental></Rentals><AmountOwed>32</AmountOwed><PointsEarned>6</PointsEarned></Statement>");
+		}
+		[TestMethod]
+		public void TestZeroRentalXML()
+		{
+			var c = new Customer("Eric");
+			Assert.AreEqual(c.XMLStatement(), "<Statement><Name>Eric</Name><Rentals></Rentals><AmountOwed>0</AmountOwed><PointsEarned>0</PointsEarned></Statement>");
+		}
+		#endregion
+
 		#region Finally Test Invalid PriceCode
 		[TestMethod, ExpectedException(typeof(ArgumentException))]
 		public void TestInalidPriceCode()

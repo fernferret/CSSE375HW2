@@ -50,11 +50,6 @@ namespace CSSE375HW2
 		public int GetFrequentRenterPoints(int daysRented)
 		{
 			return _price.GetFrequentRenterPoints(daysRented);
-			/*if((GetPriceCode() == NewRelease) && daysRented > 1)
-			{
-				return 2;
-			}
-			return 1;*/
 		}
 	}
 }

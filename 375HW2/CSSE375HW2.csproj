@@ -46,6 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChildrensPrice.cs" />
+    <Compile Include="XMLStatement.cs" />
+    <Compile Include="HtmlStatement.cs" />
+    <Compile Include="TextStatement.cs" />
+    <Compile Include="Statement.cs" />
     <Compile Include="NewReleasePrice.cs" />
     <Compile Include="RegularPrice.cs" />
     <Compile Include="Customer.cs" />
