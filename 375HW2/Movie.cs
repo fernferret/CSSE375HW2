@@ -7,22 +7,35 @@ namespace CSSE375HW2
 		public const int NewRelease = 1;
 		public const int Regular = 0;
 		private readonly String _title;
-		private int _priceCode;
+		private Price _price;
 
 		public Movie(String title, int priceCode)
 		{
 			_title = title;
-			_priceCode = priceCode;
+			SetPriceCode(priceCode);
 		}
 
 		public int GetPriceCode()
 		{
-			return _priceCode;
+			return _price.GetPriceCode();
 		}
 
 		public void SetPriceCode(int arg)
 		{
-			_priceCode = arg;
+			switch (arg)
+			{
+				case Regular:
+					_price = new RegularPrice();
+					break;
+				case Childrens:
+					_price = new ChildrensPrice();
+					break;
+				case NewRelease:
+					_price = new NewReleasePrice();
+					break;
+				default:
+					throw new ArgumentException("Incorrect Price Code");
+			}
 		}
 
 		public String GetTitle()
@@ -32,31 +45,16 @@ namespace CSSE375HW2
 
 		public double GetCharge(int daysRented)
 		{
-			double result = 0;
-			switch (GetPriceCode())
-			{
-				// The qualifier, 'Movies' is redundant here
-				case Regular:
-					result += 2;
-					if (daysRented > 2)
-						result += (daysRented - 2)*1.5;
-					break;
-				case NewRelease:
-					result += daysRented*3;
-					break;
-				case Childrens:
-					result += 1.5;
-					if (daysRented > 3)
-						result += (daysRented - 3)*1.5;
-					break;
-			}
-			return result;
+			return _price.GetCharge(daysRented);
 		}
 		public int GetFrequentRenterPoints(int daysRented)
 		{
-			if ((GetPriceCode() == NewRelease) && daysRented > 1)
+			return _price.GetFrequentRenterPoints(daysRented);
+			/*if((GetPriceCode() == NewRelease) && daysRented > 1)
+			{
 				return 2;
-			return 1;
+			}
+			return 1;*/
 		}
 	}
 }

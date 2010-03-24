@@ -1,5 +1,6 @@
 ﻿using CSSE375HW2;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace RentalTest
 {
@@ -60,6 +61,7 @@ namespace RentalTest
 			c.AddRental(r);
 			Assert.AreEqual(c.Statement(), "Rental Record for " + name + "\n\t" + movieTitle + "\t5\nAmount owed is 5\nYou earned 1 frequent renter points");
 		}
+		[TestMethod]
 		public void TestRentNewRelease()
 		{
 			var name = "Eric";
@@ -71,8 +73,9 @@ namespace RentalTest
 			var r = new Rental(m, daysRented);
 
 			c.AddRental(r);
-			Assert.AreEqual(c.Statement(), "Rental Record for " + name + "\n\t" + movieTitle + "\t3\nAmount owed is 3\nYou earned 1 frequent renter points");
+			Assert.AreEqual(c.Statement(), "Rental Record for " + name + "\n\t" + movieTitle + "\t12\nAmount owed is 12\nYou earned 2 frequent renter points");
 		}
+		[TestMethod]
 		public void TestRentChildrens()
 		{
 			var name = "Eric";
@@ -169,7 +172,7 @@ namespace RentalTest
 		#endregion
 
 		#region Finally Test Invalid PriceCode
-		[TestMethod]
+		[TestMethod, ExpectedException(typeof(ArgumentException))]
 		public void TestInalidPriceCode()
 		{
 			var name = "Eric";
@@ -181,7 +184,6 @@ namespace RentalTest
 			var r = new Rental(m, daysRented);
 
 			c.AddRental(r);
-			Assert.AreEqual(c.Statement(), "Rental Record for " + name + "\n\t" + movieTitle + "\t0\nAmount owed is 0\nYou earned 1 frequent renter points");
 		}
 		#endregion
 	}
