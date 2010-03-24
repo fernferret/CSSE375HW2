@@ -53,5 +53,18 @@ namespace CSSE375HW2
 			}
 			return result;
 		}
+		public String HtmlStatement()
+		{
+			String result = "<h1>Rentals for <em>" + GetName() + "</em></h1></p>\n";
+			foreach (var rental in _rentals)
+			{
+				// Show figures for each rental
+				result += rental.GetMovie().GetTitle() + ": " + rental.GetCharge() + "<br />\n";
+			}
+			// Add footer lines
+			result += "<p>You owe <em>" + GetTotalCharge() + "</em></p>\n";
+			result += "On this rental you earned <em>" + GetTotalFrequentRenterPoints() + "</em> frequent renter points</p>";
+			return result;
+		}
 	}
 }

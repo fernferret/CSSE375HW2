@@ -128,6 +128,46 @@ namespace RentalTest
 		}
 		#endregion
 
+		#region Test Multiple Rentals HTML version
+		[TestMethod]
+		public void TestTwoRentalHtml()
+		{
+			var m = new Movie("Taken", Movie.NewRelease);
+			var m2 = new Movie("The Rock", Movie.Regular);
+			var r = new Rental(m, 4);
+			var r2 = new Rental(m2, 5);
+			var c = new Customer("Eric");
+			c.AddRental(r);
+			c.AddRental(r2);
+			Assert.AreEqual(c.HtmlStatement(), "<h1>Rentals for <em>Eric</em></h1></p>\nTaken: 12<br />\nThe Rock: 6.5<br />\n<p>You owe <em>18.5</em></p>\nOn this rental you earned <em>3</em> frequent renter points</p>");
+		}
+		[TestMethod]
+		public void TestMultiRentalHtml()
+		{
+			var m = new Movie("Taken", Movie.NewRelease);
+			var m2 = new Movie("The Rock", Movie.Regular);
+			var m3 = new Movie("300", Movie.NewRelease);
+			var m4 = new Movie("Bambi", Movie.Childrens);
+			var r = new Rental(m, 4);
+			var r2 = new Rental(m2, 5);
+			var r3 = new Rental(m3, 2);
+			var r4 = new Rental(m4, 7);
+
+			var c = new Customer("Eric");
+			c.AddRental(r);
+			c.AddRental(r2);
+			c.AddRental(r3);
+			c.AddRental(r4);
+			Assert.AreEqual(c.HtmlStatement(), "<h1>Rentals for <em>Eric</em></h1></p>\nTaken: 12<br />\nThe Rock: 6.5<br />\n300: 6<br />\nBambi: 7.5<br />\n<p>You owe <em>32</em></p>\nOn this rental you earned <em>6</em> frequent renter points</p>");
+		}
+		[TestMethod]
+		public void TestZeroRentalHtml()
+		{
+			var c = new Customer("Eric");
+			Assert.AreEqual(c.HtmlStatement(), "<h1>Rentals for <em>Eric</em></h1></p>\n<p>You owe <em>0</em></p>\nOn this rental you earned <em>0</em> frequent renter points</p>");
+		}
+		#endregion
+
 		#region Finally Test Invalid PriceCode
 		[TestMethod]
 		public void TestInalidPriceCode()
